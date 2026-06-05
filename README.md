@@ -1,112 +1,157 @@
-Sales Forecasting Analysis System
+Loan Default Prediction Analysis
 Overview
 
-Businesses generate large amounts of sales data every day, but making sense of that data can be challenging. Understanding sales patterns is important for inventory management, marketing strategies, and business growth.
+Loan approval and risk assessment are critical processes in the banking and financial sector. Financial institutions need to understand borrower characteristics and loan behavior to reduce the risk of defaults and make informed lending decisions.
 
-This project focuses on analyzing historical sales data using Exploratory Data Analysis (EDA). The goal is to identify trends, understand customer purchasing behavior, compare store performance, and extract meaningful business insights that can support future sales forecasting decisions.
+This project performs Exploratory Data Analysis (EDA) on loan data and builds a basic Machine Learning model using Linear Regression to analyze the relationship between borrower information and loan amounts. Various visualizations are used to uncover patterns in loan status, income levels, interest rates, and loan purposes.
 
-Project Objectives
-Analyze historical sales data
-Clean and preprocess raw data
-Identify sales trends over time
-Compare store performance
-Find top-selling and low-performing products
-Detect seasonal patterns
-Visualize sales behavior using charts and graphs
-Generate actionable business insights
+Objectives
+Analyze loan application data
+Clean and preprocess raw loan records
+Explore borrower demographics and loan characteristics
+Visualize loan distribution and repayment status
+Identify factors influencing loan amounts
+Build a predictive model using Linear Regression
+Evaluate model performance using R² Score
 Dataset Information
 
-Dataset Source: Kaggle
+The dataset contains loan application and repayment information collected from borrowers.
 
-Dataset: Sales Forecasting Dataset
-
-Features Used
-Column	Description
-Date	Transaction date
-Store	Store ID
-Item	Product ID
-Sales	Number of items sold
+Selected Features
+Feature	Description
+loan_amnt	Loan amount requested
+term	Loan duration (months)
+int_rate	Interest rate
+annual_inc	Annual income of borrower
+emp_length	Employment length
+home_ownership	Home ownership status
+purpose	Purpose of the loan
+grade	Loan grade assigned
+loan_status	Current loan status
 Technologies Used
 Python
 Pandas
 NumPy
 Matplotlib
 Seaborn
+Plotly
+Scikit-Learn
 Jupyter Notebook
-Project Workflow
-1. Data Collection
+Data Preprocessing
 
-The sales dataset was downloaded from Kaggle and loaded into Python for analysis.
+The following preprocessing steps were performed:
 
-2. Data Cleaning
+Feature Selection
 
-The dataset was prepared by:
+Relevant columns were extracted from the original dataset containing 151 columns.
 
-Checking missing values
-Removing duplicate records
-Converting date columns into datetime format
-Ensuring data consistency
-3. Exploratory Data Analysis
+Missing Value Handling
 
-Several analyses were performed, including:
+Rows containing missing values were removed using:
 
-Total sales calculation
-Average sales analysis
-Maximum and minimum sales identification
-Sales distribution analysis
-4. Sales Trend Analysis
+df.dropna(inplace=True)
+Data Conversion
 
-Sales patterns were analyzed over different time periods to understand:
+Interest rates were converted from string format to numerical values.
 
-Daily sales behavior
-Monthly sales trends
-Seasonal variations
-Peak sales periods
-5. Store and Product Analysis
+df['int_rate'] = df['int_rate'].astype(str).str.replace('%','').astype(float)
 
-Performance comparisons were conducted to identify:
+Loan term values were converted into integer months.
 
-Best-performing stores
-Top-selling products
-Low-performing products
-Revenue-driving business areas
-6. Data Visualization
+df['term'] = df['term'].astype(str).str.extract('(\d+)').astype(int)
+Exploratory Data Analysis
+Descriptive Statistics
 
-Various visualizations were created, including:
+The project calculates:
 
-Line Charts
-Bar Charts
-Histograms
-Box Plots
-Correlation Heatmaps
+Average Loan Amount
+Average Annual Income
+Minimum and Maximum Values
+Standard Deviation
+Quartile Distribution
+Dataset Summary
+Total Records After Cleaning: 9,272
+Average Loan Amount: 15,306
+Average Annual Income: 80,653
+Loan Status Distribution
 
-These visualizations help reveal hidden patterns and make the data easier to understand.
+Loan status analysis revealed:
+
+Loan Status	Count
+Fully Paid	6670
+Charged Off	1570
+Current	961
+Late (31-120 days)	57
+In Grace Period	11
+Late (16-30 days)	3
+
+The majority of loans in the dataset were successfully repaid.
+
+Data Visualizations
+
+Several visualizations were created to better understand the dataset.
+
+Count Plot
+
+Displays the distribution of loan statuses.
+
+Box Plot
+
+Compares annual income across different loan statuses.
+
+Purpose Analysis
+
+Shows the relationship between loan purpose and repayment status.
+
+Scatter Plot
+
+Analyzes the relationship between:
+
+Annual Income
+Loan Amount
+Correlation Heatmap
+
+Identifies correlations among numerical variables.
+
+Interactive Plotly Visualizations
+Loan Amount Distribution
+Income vs Loan Amount Analysis
+Loan Status Visualization
+Machine Learning Model
+Model Used
+
+Linear Regression
+
+The model predicts loan amount using:
+
+Annual Income
+Interest Rate
+Loan Term
+Feature Matrix
+X = df[['annual_inc','int_rate','term']]
+Target Variable
+y = df['loan_amnt']
+Train-Test Split
+test_size = 20%
+random_state = 42
+Model Training
+model = LinearRegression()
+model.fit(X_train, y_train)
+Model Evaluation
+
+The model was evaluated using the R² Score.
+
+Result
+R² Score = 0.2798
+Interpretation
+
+The model explains approximately 28% of the variation in loan amounts using annual income, interest rate, and loan term.
+
+This indicates that additional borrower features may be required to improve prediction accuracy.
 
 Key Insights
-
-Some of the insights obtained from this analysis include:
-
-Identification of peak sales periods
-Recognition of seasonal demand patterns
-Discovery of high-performing stores
-Detection of top-selling products
-Understanding of sales fluctuations over time
-Business Impact
-
-The findings from this project can help businesses:
-
-Improve inventory planning
-Reduce overstocking and understocking
-Optimize marketing campaigns
-Support data-driven decision-making
-Improve future sales forecasting strategies
-
-<img width="600" height="438" alt="image" src="https://github.com/user-attachments/assets/5af326ce-af78-4131-b2a1-fe9dae794d00" />
-<img width="587" height="448" alt="image" src="https://github.com/user-attachments/assets/3292584e-23dc-4bb0-906b-feb72f44f6f2" />
-<img width="580" height="558" alt="image" src="https://github.com/user-attachments/assets/8e1e9284-0432-441e-bf19-d69bce81e684" />
-<img width="589" height="433" alt="image" src="https://github.com/user-attachments/assets/12149967-21b0-4f19-bf3a-7fae8ed4d3a7" />
-<img width="515" height="418" alt="image" src="https://github.com/user-attachments/assets/8015705c-c253-4515-b74b-aab594852033" />
-
-
-
-
+Most borrowers successfully repay their loans.
+Higher annual income generally corresponds to larger loan amounts.
+Interest rates vary significantly across loan grades.
+Certain loan purposes have higher default rates.
+Loan amount is influenced by multiple factors beyond income and interest rate.
