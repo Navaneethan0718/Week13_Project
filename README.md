@@ -155,3 +155,14 @@ Higher annual income generally corresponds to larger loan amounts.
 Interest rates vary significantly across loan grades.
 Certain loan purposes have higher default rates.
 Loan amount is influenced by multiple factors beyond income and interest rate.
+
+<img width="600" height="438" alt="image" src="https://github.com/user-attachments/assets/14ec4208-af7e-4ac8-ab79-043c18793ea4" />
+<img width="587" height="448" alt="image" src="https://github.com/user-attachments/assets/5b6b54e3-38cb-4ec5-8c1c-ae8ad2926f36" />
+<img width="580" height="558" alt="image" src="https://github.com/user-attachments/assets/4295ee0e-e1ff-407b-acd0-f5dfd6538bfd" />
+<img width="589" height="433" alt="image" src="https://github.com/user-attachments/assets/7156404b-22f2-40a2-831d-92e49d576a38" />
+<img width="515" height="418" alt="image" src="https://github.com/user-attachments/assets/a06b64dc-6cd0-44dd-8f7a-55b7a9d8384a" />
+
+
+
+
+
